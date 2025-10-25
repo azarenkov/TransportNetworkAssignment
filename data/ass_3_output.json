@@ -1,0 +1,100 @@
+{
+  "results": [
+    {
+      "graph_id": 1,
+      "prim": {
+        "edges": [
+          {
+            "from": "A",
+            "to": "C",
+            "weight": 3
+          },
+          {
+            "from": "C",
+            "to": "B",
+            "weight": 2
+          },
+          {
+            "from": "B",
+            "to": "D",
+            "weight": 5
+          },
+          {
+            "from": "D",
+            "to": "E",
+            "weight": 6
+          }
+        ],
+        "totalWeight": 16
+      },
+      "kruskal": {
+        "edges": [
+          {
+            "from": "B",
+            "to": "C",
+            "weight": 2
+          },
+          {
+            "from": "A",
+            "to": "C",
+            "weight": 3
+          },
+          {
+            "from": "B",
+            "to": "D",
+            "weight": 5
+          },
+          {
+            "from": "D",
+            "to": "E",
+            "weight": 6
+          }
+        ],
+        "totalWeight": 16
+      }
+    },
+    {
+      "graph_id": 2,
+      "prim": {
+        "edges": [
+          {
+            "from": "A",
+            "to": "B",
+            "weight": 1
+          },
+          {
+            "from": "B",
+            "to": "C",
+            "weight": 2
+          },
+          {
+            "from": "C",
+            "to": "D",
+            "weight": 3
+          }
+        ],
+        "totalWeight": 6
+      },
+      "kruskal": {
+        "edges": [
+          {
+            "from": "A",
+            "to": "B",
+            "weight": 1
+          },
+          {
+            "from": "B",
+            "to": "C",
+            "weight": 2
+          },
+          {
+            "from": "C",
+            "to": "D",
+            "weight": 3
+          }
+        ],
+        "totalWeight": 6
+      }
+    }
+  ]
+}
