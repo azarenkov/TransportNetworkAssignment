@@ -44,13 +44,20 @@ public class Main {
                     kruskal.addEdge(source, dest, weight);
                 }
 
+                long primStart = System.nanoTime();
                 List<Edge> primMST = prim.findMST();
+                long primTime = (System.nanoTime() - primStart) / 1_000_000;
+
+                long kruskalStart = System.nanoTime();
                 List<Edge> kruskalMST = kruskal.findMST();
+                long kruskalTime = (System.nanoTime() - kruskalStart) / 1_000_000;
 
                 JsonObject graphResult = new JsonObject();
                 graphResult.addProperty("graph_id", graphId);
-                graphResult.add("prim", edgesToJson(primMST, nodeToIndex));
-                graphResult.add("kruskal", edgesToJson(kruskalMST, nodeToIndex));
+                graphResult.addProperty("vertices", vertices);
+                graphResult.addProperty("edges", edgesArray.size());
+                graphResult.add("prim", algorithmResult(primMST, nodeToIndex, prim.getOperationCount(), primTime));
+                graphResult.add("kruskal", algorithmResult(kruskalMST, nodeToIndex, kruskal.getOperationCount(), kruskalTime));
                 resultsArray.add(graphResult);
             }
 
@@ -68,7 +75,7 @@ public class Main {
         }
     }
 
-    private static JsonObject edgesToJson(List<Edge> edges, Map<String, Integer> nodeToIndex) {
+    private static JsonObject algorithmResult(List<Edge> edges, Map<String, Integer> nodeToIndex, int operations, long timeMs) {
         Map<Integer, String> indexToNode = new HashMap<>();
         for (Map.Entry<String, Integer> entry : nodeToIndex.entrySet()) {
             indexToNode.put(entry.getValue(), entry.getKey());
@@ -89,6 +96,8 @@ public class Main {
         JsonObject result = new JsonObject();
         result.add("edges", array);
         result.addProperty("totalWeight", totalWeight);
+        result.addProperty("operations", operations);
+        result.addProperty("executionTimeMs", timeMs);
 
         return result;
     }
